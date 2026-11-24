@@ -1,0 +1,62 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- 必须与 build 产物的包名前缀一致；改名会导致用户配置丢失 -->
+    <id>com.harveybase.anytab</id>
+    <name>AnyTab</name>
+    <vendor url="https://github.com/HarveyBase/anytab">HarveyBase</vendor>
+
+    <description><![CDATA[
+        <p>AI inline code completion for JetBrains IDEs with your own model.</p>
+        <ul>
+            <li>Ghost-text completion while you type, <b>Tab</b> to accept (powered by the IDE's built-in inline completion).</li>
+            <li>Presets for <b>DeepSeek</b> (native FIM), <b>Zhipu GLM</b> and <b>NewAPI</b> gateways, plus any OpenAI-compatible endpoint (Ollama, LM Studio, vLLM&hellip;).</li>
+            <li>Multiple providers, switch from the status bar; API keys are stored in the IDE Password Safe.</li>
+        </ul>
+    ]]></description>
+
+    <!-- 没有 since-build/until-build：由 IntelliJ Platform Gradle Plugin 在构建时写入 -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <resource-bundle>messages.AnyTabBundle</resource-bundle>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- id 必须与 AnyTabInlineCompletionProvider.id 一致 -->
+        <inline.completion.provider
+                id="com.harveybase.anytab.inline.AnyTabInlineCompletionProvider"
+                implementation="com.harveybase.anytab.inline.AnyTabInlineCompletionProvider"/>
+
+        <applicationService serviceImplementation="com.harveybase.anytab.settings.AnyTabSettings"/>
+        <applicationService serviceImplementation="com.harveybase.anytab.completion.CompletionEngine"/>
+        <projectService serviceImplementation="com.harveybase.anytab.settings.AnyTabProjectState"/>
+
+        <applicationConfigurable
+                id="com.harveybase.anytab"
+                parentId="tools"
+                displayName="AnyTab"
+                instance="com.harveybase.anytab.settings.AnyTabConfigurable"/>
+
+        <statusBarWidgetFactory
+                id="AnyTab"
+                implementation="com.harveybase.anytab.ui.AnyTabStatusBarWidgetFactory"/>
+
+        <notificationGroup id="com.harveybase.anytab" displayType="BALLOON"/>
+    </extensions>
+
+    <actions>
+        <action id="com.harveybase.anytab.toggle"
+                class="com.harveybase.anytab.ui.ToggleAnyTabAction"
+                text="Enable AnyTab Completion"
+                description="Enable or disable AnyTab inline completion for the current project"/>
+
+        <action id="com.harveybase.anytab.settings"
+                class="com.harveybase.anytab.ui.OpenSettingsAction"
+                text="AnyTab Settings..."
+                description="Configure AnyTab providers and completion behavior"/>
+
+        <group id="com.harveybase.anytab.menu" text="AnyTab" popup="true">
+            <reference ref="com.harveybase.anytab.toggle"/>
+            <reference ref="com.harveybase.anytab.settings"/>
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </group>
+    </actions>
+</idea-plugin>
