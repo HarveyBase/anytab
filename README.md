@@ -87,7 +87,7 @@ Details: [docs/architecture.md](docs/architecture.md). Design notes and roadmap:
 ## Development
 
 ```bash
-./gradlew test                  # unit tests + a local mock-server streaming test
+./gradlew test                  # unit tests, a mock-server streaming test, and a headless-IDE smoke test
 ./gradlew buildPlugin           # compiles against IntelliJ IDEA 2026.3 (downloaded from JetBrains)
 ./gradlew verifyPlugin          # IntelliJ Plugin Verifier
 ```

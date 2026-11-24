@@ -22,7 +22,8 @@
 - [x] 设置页：供应商增删、表单、测试连接、当前供应商、补全行为
 - [x] 状态栏部件 + 弹出菜单（开关 / 切换供应商 / 设置）+ Tools 菜单
 - [x] 鉴权失败通知（每个供应商一次）
-- [ ] 在 GoLand 2026.3 里实装验证：打字出灰字、Tab / 词 / 行采纳、Esc、手动触发、开关
+- [x] 无头 IDE 冒烟测试（平台测试 DSL + 本机模拟模型服务）：手动触发、打字触发、渲染、Tab 采纳、Esc、排除文件不发请求
+- [ ] 在 GoLand 2026.3 图形界面里实装验证：状态栏部件、设置页布局、手动触发快捷键
 
 ## M2 更多供应商
 
@@ -37,9 +38,11 @@
 
 - [x] 单测：过滤器、上下文窗口、请求体、SSE、本地模拟服务的流式集成测试
 - [x] README（中 / 英）、CHANGELOG、LICENSE
+- [x] Plugin Verifier：对 GoLand 2026.3（GO-263.7307.211）判定 Compatible，仅 2 条平台遗留的 deprecated 桥接
 - [ ] 提交 GitHub Actions 工作流（当前 gh token 没有 `workflow` scope，推不上去）
 - [ ] 放宽 `sinceBuild`：需要为 2026.3 之前的包路径做兼容（反射或双实现），并用 `verifyPlugin` 验证 2024.3 ~ 2026.3
 - [ ] 首个 GitHub Release（附 zip）
+- [ ] JSON 解析目前依赖 IDE 自带的 Gson；平台哪天把它挪走（2026.3 就挪了不少老类）需要改成自带的小库
 - [ ] 可选：JetBrains Marketplace 发布（需要签名）
 - [ ] 可选：检测到其它行内补全 provider 时给一次提示
 - [ ] 可选：发布前用 Plugin Verifier 的结果决定 `untilBuild`

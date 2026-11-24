@@ -85,7 +85,7 @@ JetBrains IDE 的 AI 行内代码补全插件，模型自己带：DeepSeek 原�
 ## 开发
 
 ```bash
-./gradlew test                  # 单测 + 本地模拟服务的流式集成测试
+./gradlew test                  # 单测 + 本地模拟服务的流式集成测试 + 无头 IDE 冒烟测试
 ./gradlew buildPlugin           # 以 IntelliJ IDEA 2026.3 为平台编译（从 JetBrains 下载）
 ./gradlew verifyPlugin          # 跑 IntelliJ Plugin Verifier
 ```
